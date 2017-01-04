@@ -1,4 +1,4 @@
-# Visualization in HCI / 05-499/05-899 Section C Homework 0
+# Visualization in HCI Homework 0
 
 **Due: Friday, January 20, 11:59 pm.**
 
