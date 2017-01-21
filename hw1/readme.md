@@ -2,7 +2,7 @@
 
 ## Introduction to Git
 
-Attend the lecture on git and [follow the instructions on the homework](http://cmu-vis-course.github.io/2017/homework/) on setting up your **private** git repository for the homework. This involves creating a repository, sharing it with our github user [cmu-vis-instructor](https://github.com/cmu-vis-instructor), and announcing your project repository through [this form](https://goo.gl/forms/bnEOhXLAHT1EHaTp1). Be sure to follow all the instructions on the homework page!
+Attend the lecture on git and [follow the instructions](../lectures/lecture-git/) on setting up your **private** git repository for the homework. This involves creating a repository, sharing it with our github user [cmu-vis-instructor](https://github.com/cmu-vis-instructor), and announcing your project repository through [this form](https://goo.gl/forms/bnEOhXLAHT1EHaTp1). Be sure to follow all the instructions!
 
 Edit the `README.md` file at the root of your repository to add your name and email address. Commit your changes.
 
