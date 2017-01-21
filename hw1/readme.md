@@ -1,4 +1,4 @@
-# Visualization in HCI Homework 0
+# Visualization in HCI Homework 1
 
 ## Introduction to Git
 
