@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <style>
+		rect {
+			fill:green; 
+			stroke:lime; 
+			stroke-width:1px;
+			transition:ease 1s;
+		}
+		
+		rect:hover {
+			fill:white;
+		}
+		
+		path {
+			stroke:red;
+			fill: orange;
+			
+		}
+		.nofill {
+			fill:none;
+		}
+		
+		line {
+			stroke:blue;
+		}
+		
+		circle {
+			fill:blue;
+			stroke:cyan;
+		}
+	</style>
+  
+  </head>
+  <body>
+	  <h1>Visualization in HCI Homework 1</h1>
+	  <p>Shunta McDavid</p>
+	  <p>smcdavid@andrew.cmu.edu</p>
+	  
+	  <svg width="400" height="170">
+		<g transform="translate(0,170) scale(1,-1)">
+	  		<rect x="50" y="50" width="100" height="10" />
+			<rect x="50" y="60" width="80" height="10" />
+			<rect x="50" y="70" width="130" height="10" />
+			<rect x="50" y="80" width="90" height="10" />
+			<rect x="50" y="90" width="110" height="10" />
+			<rect x="50" y="100" width="140" height="10" />
+			<rect x="50" y="110" width="60" height="10" />
+			<rect x="50" y="120" width="40" height="10" />
+			<rect x="50" y="130" width="120" height="10" />
+			<rect x="50" y="140" width="70" height="10" />
+			<rect x="50" y="150" width="50" height="10" />
+	  	</g>
+		<g transform="translate(0,170) scale(1,-1)">
+	  		<rect x="250" y="50" width="80.4" height="10" />
+			<rect x="250" y="60" width="69.5" height="10" />
+			<rect x="250" y="70" width="75.8" height="10" />
+			<rect x="250" y="80" width="88.1" height="10" />
+			<rect x="250" y="90" width="83.3" height="10" />
+			<rect x="250" y="100" width="99.6" height="10" />
+			<rect x="250" y="110" width="72.4" height="10" />
+			<rect x="250" y="120" width="42.6" height="10" />
+			<rect x="250" y="130" width="108.4" height="10" />
+			<rect x="250" y="140" width="48.2" height="10" />
+			<rect x="250" y="150" width="56.8" height="10" />
+	  	</g>  
+	  
+	  </svg>
+	  
+	  <svg width="100" height="170">
+		<g transform="translate(0,170) scale(1,-1)">
+	  		<path class="nofill" d="M 0 100 L 10 80 L 20 130 L 30 90 L 40 110 L 50 140 L 60 60 L 70 40 L 80 120 L 90 70 L 100 50" />
+	  	</g>
+	  </svg>
+	  <svg width="100" height="170">
+		 <g transform="translate(0,170) scale(1,-1)">
+	  		<line x1="0" y1="80.4" x2="10" y2="69.5"/>
+    		<line x1="10" y1="69.5" x2="20" y2="75.8"/>
+			<line x1="20" y1="75.8" x2="30" y2="88.1"/>
+    		<line x1="30" y1="88.1" x2="40" y2="83.3"/>
+			<line x1="40" y1="83.3" x2="50" y2="99.6"/>
+    		<line x1="50" y1="99.6" x2="60" y2="72.4"/>
+			<line x1="60" y1="72.4" x2="70" y2="42.6"/>
+    		<line x1="70" y1="42.6" x2="80" y2="108.4"/>
+			<line x1="80" y1="108.4" x2="90" y2="48.2"/>
+    		<line x1="90" y1="48.2" x2="100" y2="56.8"/>
+	  	</g>  
+	  
+	  </svg>
+	  <svg width="100" height="170">
+		<g transform="translate(0,170) scale(1,-1)">
+	  		<path d="M 0 0 L 0 100 L 10 80 L 20 130 L 30 90 L 40 110 L 50 140 L 60 60 L 70 40 L 80 120 L 90 70 L 100 50 L 100 0 Z" />
+	  	</g>
+	  </svg>
+	  <svg width="100" height="170">
+		<g transform="translate(0,170) scale(1,-1)">
+	  		<path d="M 0 0 L 0 80.4 L 10 69.5 L 20 75.8 L 30 88.1 L 40 83.3 L 50 99.6 L 60 72.4 L 70 42.6 L 80 108.4 L 90 48.2 L 100 56.8 L 100 0 Z" />
+	  	</g>
+	  </svg>
+	  
+	  <svg width="200" height="170" style="border:1px black solid;">
+		<g transform="translate(0,170) scale(1,-1)" >
+	  		<circle cx="100" cy="80.4" r="5"/>
+        	<circle cx="80" cy="69.5" r="5"/>
+        	<circle cx="130" cy="75.8" r="5"/>
+        	<circle cx="90" cy="88.1" r="5"/>
+			<circle cx="110" cy="83.3" r="5"/>
+        	<circle cx="140" cy="99.6" r="5"/>
+        	<circle cx="60" cy="72.4" r="5"/>
+        	<circle cx="40" cy="42.6" r="5"/>
+			<circle cx="120" cy="108.4" r="5"/>
+        	<circle cx="70" cy="48.2" r="5"/>
+			<circle cx="50" cy="56.8" r="5"/>
+	  	</g>
+	  </svg>
+    
+  </body>
+</html>
