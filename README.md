@@ -1,4 +1,3 @@
-# cmuviscourse17-hw-mcdavid-shunta
-HCI Visualization homework assignments
-Shunta McDavid
-smcdavid@andrew.cmu.edu
+# 2017-cmu-vis-course homework
+
+Homework assignments for the course http://cmu-vis-course.github.io

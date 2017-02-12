@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dom</title>
+	
+  </head>
+  <body>
+	  <!--<div id="mainDiv"></div>-->
+	  <button onclick="messageMe()">Click Me</button>
+	  <button id="myButton">No, click me!</button>
+	  <div onclick="divMessage()">Can you click me?</div>
+	  <script>
+		  var messageMe = function(){
+			  alert("Yes,it's me! Button 1");
+		  }
+		  
+		  document.getElementById('myButton').onclick = function() {
+			  alert("Button 2");
+		  }
+		  
+		  function divMessage() {
+			  alert("divs can be clicked too!");
+		  }
+		  
+		/*function divWithText(text){
+			var result = document.createElement("div");
+			var textNode = document.createTextNode(text);
+			result.appendChild(textNode);
+			return result;
+			
+		}  */
+		  
+	  	/*for(i=0; i<10; i++){
+			mainDiv.appendChild(divWithText(String(i)));
+			
+		}*/
+		  
+		//style the text with position and color
+		  
+		/*function textAt(text,x,y){
+			var node = divWithText(text);
+			node.setAttribute("style","position:absolute; left: " + x + "px; top: " + y % 50 + "px; color: hsl(" + x % 255 + ", 100%, 50%)");
+			return node;
+		}*/
+		  
+		/*function numberText(v){
+			var node = divWithText(String(Math.floor(v)));
+			
+			node.update = function (amount) {
+				
+				v += amount;
+				node.textContent = String(Math.floor(v));
+				var x = v % 800;
+				var y = v % 50;
+				node.setAttribute("style","position:absolute; left: " + x + "px; top: " + y % 50 + "px; color: hsl(" + x % 255 + ", 100%, 50%)");
+				
+			}
+			
+			node.update(0);
+			return node;
+		}  
+		
+		function tick(){
+			var i;
+			for(i=0; i<nodes.length; i++){
+				nodes[i].update(1);
+			}
+		} 
+		  
+		function tickForever() {
+			tick();
+			window.requestAnimationFrame(tickForever);
+		}  
+		
+		var nodes = [];
+		for (var i=0; i<400; i+=30){
+			var node = numberText(i);
+			mainDiv.appendChild(node);
+			nodes.push(node);
+			
+		}
+		 
+		tickForever();  */
+		  
+		/*mainDiv = document.getElementById("mainDiv");*/
+		  
+		/*for (var i=0; i<200; i+=10) {
+			mainDiv.appendChild(textAt(String(i), 3*i, 3*i));
+			
+		}  */
+		  
+		  
+		  /*mainDiv = document.getElementById("mainDiv");
+		console.log(mainDiv); 
+		  
+		var newParagraph = document.createElement("p");
+		newParagraph.appendChild(
+			document.createTextNode("Here is some text in a paragraph")
+		);
+		 
+		mainDiv.appendChild(newParagraph);*/
+		
+		  
+		  
+		  
+	  </script>
+  </body>
+</html>
