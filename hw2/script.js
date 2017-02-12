@@ -36,12 +36,12 @@ function updateBarChart(selectedDimension) {
     // to position and size the bars in y direction
 	var yScale = d3.scaleLinear()
 			.domain([0, d3.max(vertCol)])
-            .range([svgBounds.height,0 ]);
+            .range([svgBounds.height,vertMargin ]);
 	
     // Create colorScale
 	var colorScale = d3.scaleLinear()
             .domain([d3.min(vertCol), d3.max(vertCol)])
-            .range(["#00F","#47FFB6"]);
+            .range(["#47FFB6","#00F"]);
 	
     // Create the axes (hint: use #xAxis and #yAxis)
 	var xAxis = d3.axisBottom(xScale);
@@ -56,17 +56,18 @@ function updateBarChart(selectedDimension) {
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
             .attr("transform", function(d) {
-                return "rotate(-80)" 
+                return "rotate(-80)"; 
         });
 	
 	
 	var yAxis = d3.axisLeft(yScale);
 	var yLine = d3.select("#yAxis")
-		.call(yAxis)
 		.attr("transform", function(d){
-			/*var y = svgBounds.width - horMargin;*/
-			return "translate(" + horMargin + "," + 0 + ")";
-		});
+			var y = vertMargin*-1
+			return "translate(" + horMargin + "," + y + ")";
+		})
+		.transition().duration(1000)
+		.call(yAxis);
 	
     // Create the bars (hint: use #bars)
 	// Select all rect's in #bars and bind the world cup data to them    
@@ -76,33 +77,39 @@ function updateBarChart(selectedDimension) {
 	
 	// handle the enter() condition and merge with existing rects 
 	bars = bars.enter()        
-		.append('rect')        
+		.append('rect')
 		.merge(bars); 
 	// handle the exit() case to remove any bars that no longer have data assigned to them    
 	bars.exit().remove(); 
 	// finally, assign the necessary attributes to the bars      
 	bars.attr('x', function (d,i) {            
 			return xScale(horCol[i]);         
-	})        
+		})        
 		.attr('width', 20)        
-		.attr('y', vertMargin - svgBounds.height)        
+		.attr('y', vertMargin - svgBounds.height)
+		.transition().duration(1000).ease(d3.easeQuad)
 		.attr('height', function (d, i) {            
-			return svgBounds.height - yScale(vertCol[i]) - vertMargin;      
-	})        
+			return svgBounds.height - yScale(vertCol[i]);      
+		})        
 		.attr('fill', function (d, i) {            
 			return colorScale(vertCol[i]);         
-	});
+		});
 	
     
 	
     // ******* TODO: PART II *******
 
     // Implement how the bars respond to click events
-    // Color the selected bar to indicate is has been selected.
+	// Color the selected bar to indicate is has been selected.
     // Make sure only the selected bar has this new color.
+    bars.on("click", function(d,i){
+			d3.selectAll("rect").classed("pick",false);
+			d3.select(this).attr("class", "pick")
+
+			console.log("You selected year: " + horCol[i])
+		})
 
     // Output the selected bar to the console using console.log()
-
 }
 
 /**
@@ -117,8 +124,8 @@ function chooseData() {
     // ******* TODO: PART I *******
     //Changed the selected data when a user selects a different
     // menu item from the drop down.
-	var select = document.getElementById("#dataset");
-	
+	var select = document.getElementById("dataset");
+	updateBarChart(select.options[select.selectedIndex].value);
 	
 }
 
