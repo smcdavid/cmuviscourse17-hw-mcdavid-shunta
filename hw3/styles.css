@@ -36,6 +36,7 @@
 
 .selected {
     fill: #d20a11;
+	transition:ease 1s;
 }
 
 /*Map grid style*/
@@ -83,6 +84,10 @@ header {
     clear: left;
     text-align: left;
     height: 100px;
+}
+
+rect {
+	cursor:pointer;
 }
 
 #logo {
@@ -141,3 +146,6 @@ header {
     font-size: 14px;
 
 }
+
+		
+

@@ -36,7 +36,7 @@ function updateBarChart(selectedDimension) {
     // to position and size the bars in y direction
 	var yScale = d3.scaleLinear()
 			.domain([0, d3.max(vertCol)])
-            .range([svgBounds.height,vertMargin ]);
+            .range([svgBounds.height,vertMargin]);
 	
     // Create colorScale
 	var colorScale = d3.scaleLinear()

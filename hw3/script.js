@@ -8,26 +8,108 @@ var allWorldCupData;
  * @param selectedDimension a string specifying which dimension to render in the bar chart
  */
 function updateBarChart(selectedDimension) {
-
+	
     var svgBounds = d3.select("#barChart").node().getBoundingClientRect(),
         xAxisWidth = 100,
         yAxisHeight = 70;
 
-    // ******* TODO: PART I *******
-    // Copy over your HW2 code here
+	var vertCol = [];
+	var horCol = [];
+	var vertMargin = 50;
+	var horMargin = 60;
+	
+	
+	allWorldCupData.forEach(function(d){
+		vertCol.unshift(d[selectedDimension]);
+		horCol.unshift(d.year);
+	});
+
+    // Create the x and y scales; make
+    // sure to leave room for the axes
+    var xScale = d3.scaleBand()
+			.domain(horCol)
+            .range([horMargin, svgBounds.width]);
+	
+	// here we use an ordinal scale with scaleBand
+    // to position and size the bars in y direction
+	var yScale = d3.scaleLinear()
+			.domain([0, d3.max(vertCol)])
+            .range([svgBounds.height,vertMargin]);
+	
+    // Create colorScale
+	var colorScale = d3.scaleLinear()
+            .domain([d3.min(vertCol), d3.max(vertCol)])
+            .range(["#47FFB6","#00F"]);
+	
+    // Create the axes (hint: use #xAxis and #yAxis)
+	var xAxis = d3.axisBottom(xScale);
+    var xLine = d3.select("#xAxis")
+		.call(xAxis)
+		.attr("transform", function(d){
+			var y = svgBounds.height - vertMargin; 
+			return "translate(" + 0 + "," + y + ")";
+		})
+		.selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-80)"; 
+        });
+	
+	
+	var yAxis = d3.axisLeft(yScale);
+	var yLine = d3.select("#yAxis")
+		.attr("transform", function(d){
+			var y = vertMargin*-1;
+			return "translate(" + horMargin + "," + y + ")";
+		})
+		.transition().duration(1000)
+		.call(yAxis);
+	
+    // Create the bars (hint: use #bars)
+	// Select all rect's in #bars and bind the world cup data to them    
+	var bars = d3.select("#bars")
+				.selectAll("rect")
+				.data(allWorldCupData); 
+	
+	// handle the enter() condition and merge with existing rects 
+	bars = bars.enter()        
+		.append('rect')
+		.merge(bars); 
+	
+	// handle the exit() case to remove any bars that no longer have data assigned to them    
+	bars.exit().remove(); 
+	
+	// finally, assign the necessary attributes to the bars      
+	bars.attr('x', function (d,i) {            
+			return xScale(horCol[i]);         
+		})        
+		.attr('width', 20)        
+		.attr('y', vertMargin - svgBounds.height)
+		.transition().duration(1000).ease(d3.easeQuad)
+		.attr('height', function (d, i) {            
+			return svgBounds.height - yScale(vertCol[i]);      
+		})        
+		.attr('fill', function (d, i) {            
+			return colorScale(vertCol[i]);         
+		});
+	
+    
+    bars.on("click", function(d,i){
+			d3.selectAll("rect").classed("selected",false);
+			d3.select(this).attr("class", "selected")
+
+			updateInfo(d);
+		})
 }
 
-/**
- *  Check the drop-down box for the currently selected data type and update the bar chart accordingly.
- *
- *  There are 4 attributes that can be selected:
- *  goals, matches, attendance and teams.
- */
+
 function chooseData() {
 
-  // ******* TODO: PART I *******
-  // Copy over your HW2 code here
-
+  
+	var select = document.getElementById("dataset");
+	updateBarChart(select.options[select.selectedIndex].value);
 }
 
 /**
@@ -41,7 +123,35 @@ function updateInfo(oneWorldCup) {
 
     // Update the text elements in the infoBox to reflect:
     // World Cup Title, host, winner, runner_up, and all participating teams that year
+	
+	document.getElementById("edition").innerHTML = oneWorldCup.EDITION;
+	document.getElementById("host").innerHTML = oneWorldCup.host;
+	document.getElementById("winner").innerHTML = oneWorldCup.winner;
+	document.getElementById("silver").innerHTML = oneWorldCup.runner_up;
 
+	
+	var teams = [];
+	teams.unshift(oneWorldCup.TEAM_NAMES);
+	console.log(teams);
+	
+	var list = d3.select("#teams")
+				.selectAll("li")
+				.data(teams);
+	
+	
+	
+	// handle the enter() condition and merge with existing rects 
+	list = list.enter()        
+			.append('li')
+			.merge(list);
+	
+	// handle the exit() case to remove any bars that no longer have data assigned to them    
+	list.exit().remove();
+	
+	list.text(function(d, i){
+				return list[i];	
+			});
+	
     // Hint: For the list of teams, you can create an list element for each team.
     // Hint: Select the appropriate ids to update the text content.
 
