@@ -99,8 +99,7 @@ function updateBarChart(selectedDimension) {
     bars.on("click", function(d,i){
 			d3.selectAll("rect").classed("selected",false);
 			d3.select(this).attr("class", "selected")
-
-			updateInfo(d);
+			updateInfo(allWorldCupData[allWorldCupData.length - (i +1)]);
 		})
 }
 
@@ -118,25 +117,15 @@ function chooseData() {
  * @param oneWorldCup the currently selected world cup
  */
 function updateInfo(oneWorldCup) {
-
-    // ******* TODO: PART II *******
-
-    // Update the text elements in the infoBox to reflect:
-    // World Cup Title, host, winner, runner_up, and all participating teams that year
 	
 	document.getElementById("edition").innerHTML = oneWorldCup.EDITION;
 	document.getElementById("host").innerHTML = oneWorldCup.host;
 	document.getElementById("winner").innerHTML = oneWorldCup.winner;
 	document.getElementById("silver").innerHTML = oneWorldCup.runner_up;
-
-	
-	var teams = [];
-	teams.unshift(oneWorldCup.TEAM_NAMES);
-	console.log(teams);
 	
 	var list = d3.select("#teams")
 				.selectAll("li")
-				.data(teams);
+				.data(oneWorldCup.teams_names);
 	
 	
 	
@@ -149,13 +138,8 @@ function updateInfo(oneWorldCup) {
 	list.exit().remove();
 	
 	list.text(function(d, i){
-				return list[i];	
+				return d;	
 			});
-	
-    // Hint: For the list of teams, you can create an list element for each team.
-    // Hint: Select the appropriate ids to update the text content.
-
-
 }
 
 /**
@@ -169,12 +153,30 @@ function drawMap(world) {
     // updateMap() will need it to add the winner/runner_up markers.)
 
     projection = d3.geoConicConformal().scale(150).translate([400, 350]);
-
+	
+	var path = d3.geoPath()
+            .projection(projection);
     // ******* TODO: PART III *******
 
     // Draw the background (country outlines; hint: use #map)
-    // Make sure and add gridlines to the map
+    
+	d3.json("world.json", function(json) {
+		
+	d3.select("#map")
+		.selectAll("path") 
+		.data(topojson.feature(world,world.objects.countries).features)
+		.enter()
+		.append("path")
+		// here we use the familiar d attribute again to define the path
+		.attr("d", path);
 
+    });
+	
+	// Make sure and add gridlines to the map
+    //Bind data and create one path per GeoJSON feature
+	
+	
+	
     // Hint: assign an id to each country path to make it easier to select afterwards
     // we suggest you use the variable in the data element's .id field to set the id
 

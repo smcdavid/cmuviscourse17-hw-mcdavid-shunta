@@ -86,6 +86,10 @@ header {
     height: 100px;
 }
 
+li {
+	list-style-type: none;
+}
+
 rect {
 	cursor:pointer;
 }
